@@ -4,10 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start:ts": "ts-node ./src/index.ts",
-    "start": "node src/index.js",
-    "start:dev": "nodemon",
-    "start:prod": "tsc && node ./dist/index.js",
+    "start:dev": "cross-env PORT=4000 nodemon --exec ts-node src/index.ts",
+    "start:prod": "tsc && cross-env PORT=8000 node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Vladislav Magomedov",
