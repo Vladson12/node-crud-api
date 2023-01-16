@@ -1,14 +1,18 @@
 import { IncomingMessage, METHODS, ServerResponse } from 'http';
-import { User } from '../model/user';
 import { sendError, sendResponse } from './sendResponse';
 import { StatusCode, ErrorMessage, Method } from '../util/constants';
 import { validate } from 'uuid';
 import { UserRepository } from '../repository/user.repository';
 import { UserDTO } from '../dto/user.dto';
+import { userTable } from '../db/db';
 
-const userRepository = new UserRepository();
+const userRepository = new UserRepository(userTable);
 
 export const requestHandler = async (req: IncomingMessage, res: ServerResponse) => {
+  //--------------------------------------------------------
+  console.log(`Handler working on PID: ${process.pid}`);
+  //--------------------------------------------------------
+
   try {
     if (!req.url?.startsWith('/api/users')) {
       return sendError(res, StatusCode.NOT_FOUND, ErrorMessage.NOT_FOUND);
@@ -81,7 +85,7 @@ export const requestHandler = async (req: IncomingMessage, res: ServerResponse) 
   }
 };
 
-const getRequestBody = (req: IncomingMessage) => {
+export const getRequestBody = async (req: IncomingMessage) => {
   return new Promise((resolve, reject) => {
     let body = '';
 

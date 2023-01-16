@@ -5,6 +5,7 @@
   "scripts": {
     "start:dev": "nodemon --exec ts-node src/index.ts",
     "start:prod": "tsc && node dist/index.js",
+    "start:multi": "cross-env MULTI=true nodemon --exec ts-node src/index.ts",
     "test": "jest"
   },
   "author": "Vladislav Magomedov",
