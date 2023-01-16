@@ -9,10 +9,6 @@ import { userTable } from '../db/db';
 const userRepository = new UserRepository(userTable);
 
 export const requestHandler = async (req: IncomingMessage, res: ServerResponse) => {
-  //--------------------------------------------------------
-  console.log(`Handler working on PID: ${process.pid}`);
-  //--------------------------------------------------------
-
   try {
     if (!req.url?.startsWith('/api/users')) {
       return sendError(res, StatusCode.NOT_FOUND, ErrorMessage.NOT_FOUND);
